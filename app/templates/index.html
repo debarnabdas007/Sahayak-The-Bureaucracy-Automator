@@ -1,13 +1,41 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container text-center" style="padding-top: 4rem; padding-bottom: 4rem;">
-    <img src="https://via.placeholder.com/600x300.png?text=Empowering+Citizens" alt="Hero Image" class="img-fluid rounded mb-4">
-    <h1 class="display-4">Welcome to Sahayak</h1>
-    <p class="lead">Your AI-powered assistant for reporting civic issues.</p>
-    <hr class="my-4">
-    <p>Snap a photo of a problem, and we'll help you draft a formal complaint to the right authorities.</p>
-    <a class="btn btn-primary btn-lg" href="{{ url_for('report') }}" role="button">Get Started</a>
+<div class="p-5 text-center rounded-3 mb-5 shadow-sm" 
+     style="
+        background: linear-gradient(135deg, #1c2e4a 0%, #000000 100%); 
+        border: 1px solid #333;
+        color: white;
+        padding-top: 5rem !important;
+        padding-bottom: 5rem !important;
+     ">
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        
+        <div class="mb-4">
+            <i class="fas fa-landmark fa-3x" style="color: #4da6ff; text-shadow: 0 0 15px rgba(77, 166, 255, 0.5);"></i>
+        </div>
+
+        <h1 class="display-4 fw-bold mb-3">
+          Welcome to Sahayak
+        </h1>
+        
+        <p class="lead mb-4" style="color: #b0b8c4;">
+          The AI-Powered Bureaucracy Interface. <br>
+          Draft formal complaints. Notify authorities. Get action.
+        </p>
+        
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-4">
+          <a class="btn btn-primary btn-lg px-5" href="{{ url_for('report') }}" role="button">
+            Start New Report
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="container mt-5">
