@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container text-center" style="padding-top: 4rem; padding-bottom: 4rem;">
+    <img src="https://via.placeholder.com/600x300.png?text=Empowering+Citizens" alt="Hero Image" class="img-fluid rounded mb-4">
+    <h1 class="display-4">Welcome to Sahayak</h1>
+    <p class="lead">Your AI-powered assistant for reporting civic issues.</p>
+    <hr class="my-4">
+    <p>Snap a photo of a problem, and we'll help you draft a formal complaint to the right authorities.</p>
+    <a class="btn btn-primary btn-lg" href="{{ url_for('report') }}" role="button">Get Started</a>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4 text-center">
+            <div class="feature-icon mb-3">
+                <i class="fas fa-camera fa-3x"></i>
+            </div>
+            <h3>1. Snap a Photo</h3>
+            <p>Capture a clear image of the civic issue (e.g., potholes, garbage dumps).</p>
+        </div>
+        <div class="col-md-4 text-center">
+            <div class="feature-icon mb-3">
+                <i class="fas fa-magic fa-3x"></i>
+            </div>
+            <h3>2. AI Analysis</h3>
+            <p>Our AI analyzes the image, categorizes the issue, and assesses its severity.</p>
+        </div>
+        <div class="col-md-4 text-center">
+            <div class="feature-icon mb-3">
+                <i class="fas fa-paper-plane fa-3x"></i>
+            </div>
+            <h3>3. Send the Report</h3>
+            <p>Review the auto-drafted complaint and send it directly to the relevant authorities.</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

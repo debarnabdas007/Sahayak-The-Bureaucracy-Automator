@@ -1,0 +1,25 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Upload Mode</h5>
+        <p class="card-text">Upload a photo of the civic issue.</p>
+        <div class="mb-3">
+            <label for="upload-file" class="form-label">Upload Image</label>
+            <input type="file" id="upload-file" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="map" class="form-label">Pin the location on the map</label>
+            <div id="map" style="height: 300px;"></div>
+        </div>
+        <div class="mb-3">
+            <label for="datetime" class="form-label">Select Date and Time</label>
+            <input type="datetime-local" id="datetime" class="form-control">
+        </div>
+        <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" value="" id="civic-pledge">
+            <label class="form-check-label" for="civic-pledge">
+                I confirm this image is current and represents a genuine civic issue.
+            </label>
+        </div>
+        <button id="upload-btn" class="btn btn-primary w-100" disabled>Analyze Uploaded Image</button>
+    </div>
+</div>

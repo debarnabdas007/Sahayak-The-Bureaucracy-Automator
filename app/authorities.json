@@ -1,0 +1,23 @@
+{
+  "Kolkata": {
+    "name": "Kolkata Municipal Corporation (KMC)",
+    "Pothole": "complaints.roads@kmc.gov.in",
+    "Accumulated Garbage": "complaints.swm@kmc.gov.in",
+    "Street Light Outage": "complaints.lighting@kmc.gov.in",
+    "Water Logging": "complaints.drainage@kmc.gov.in",
+    "default": "grievance@kmc.gov.in"
+  },
+  "Howrah": {
+    "name": "Howrah Municipal Corporation (HMC)",
+    "default": "grievance@hmc.gov.in"
+  },
+  "Bidhannagar": {
+    "name": "Bidhannagar Municipal Corporation (BMC)",
+    "default": "support@bmc.gov.in"
+  },
+  "New Town": {
+    "name": "New Town Kolkata Development Authority (NKDA)",
+    "Pothole": "roads@nkda.in",
+    "default": "contact@nkda.in"
+  }
+}

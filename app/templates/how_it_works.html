@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %}How It Works - Sahayak{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <h1 class="mb-4 text-center">How Sahayak Works</h1>
+            <p class="lead text-center mb-5">A simple, step-by-step guide to reporting civic issues and making your community a better place.</p>
+
+            <div class="how-it-works-steps">
+                <!-- Step 1 -->
+                <div class="step">
+                    <div class="step-icon"><i class="fas fa-play-circle"></i></div>
+                    <div class="step-content">
+                        <h3>Step 1: Start Your Report</h3>
+                        <p>Navigate to our homepage and click the "Get Started" button. This will take you to our streamlined, multi-step reporting page.</p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="step">
+                    <div class="step-icon"><i class="fas fa-camera-retro"></i></div>
+                    <div class="step-content">
+                        <h3>Step 2: Provide an Image</h3>
+                        <p>You have two convenient options:</p>
+                        <ul>
+                            <li><strong>Take a Live Photo:</strong> This will open a live camera view directly in your browser. Position your camera and click "Capture" to take a photo.</li>
+                            <li><strong>Upload from Device:</strong> This will open your device's file browser for you to select an existing picture.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="step">
+                    <div class="step-icon"><i class="fas fa-check-square"></i></div>
+                    <div class="step-content">
+                        <h3>Step 3: Confirm Your Image</h3>
+                        <p>After your image is captured or uploaded, you'll see a preview. If it looks good, click "Confirm Image & Continue." If not, simply click "Try Again" to restart the process.</p>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="step">
+                    <div class="step-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="step-content">
+                        <h3>Step 4: Grant Location Access</h3>
+                        <p>After confirming the image, you'll be asked to grant location access. This is essential for us to pinpoint the exact location of the problem for the authorities.</p>
+                    </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="step">
+                    <div class="step-icon"><i class="fas fa-brain"></i></div>
+                    <div class="step-content">
+                        <h3>Step 5: AI-Powered Analysis</h3>
+                        <p>With the image and location data, our AI gets to work. It categorizes the issue (e.g., potholes, garbage), assesses its severity, and drafts a formal complaint email in both English and Bengali.</p>
+                    </div>
+                </div>
+
+                <!-- Step 6 -->
+                <div class="step">
+                    <div class="step-icon"><i class="fas fa-paper-plane"></i></div>
+                    <div class="step-content">
+                        <h3>Step 6: Review and Submit</h3>
+                        <p>You have the final say. Review the AI-generated report, edit the email drafts if needed, and confirm the details. Once you hit "Submit," Sahayak sends the formal complaint to the appropriate municipal authority.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <a href="{{ url_for('report') }}" class="btn btn-primary btn-lg">Start a Report Now</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.how-it-works-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.step {
+    display: flex;
+    align-items: flex-start; /* Align to the top */
+    background: rgba(0, 123, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-left: 5px solid #007bff;
+}
+.step-icon {
+    font-size: 2.5rem;
+    color: #007bff;
+    margin-right: 1.5rem;
+    flex-shrink: 0;
+    padding-top: 0.5rem; /* Adjust icon position */
+}
+.theme-dark .step {
+    background: rgba(187, 134, 252, 0.05);
+    border-left-color: #bb86fc;
+}
+.theme-dark .step-icon {
+    color: #bb86fc;
+}
+.theme-dark .step-content h3 {
+    color: #bb86fc; /* Ensure heading color is consistent in dark mode */
+}
+
+</style>
+{% endblock %}

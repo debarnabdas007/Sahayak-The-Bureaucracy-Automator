@@ -1,0 +1,24 @@
+{
+    "departments": [
+        {
+            "category": "Garbage",
+            "email": "garbage.department@example.com"
+        },
+        {
+            "category": "Pothole",
+            "email": "roads.department@example.com"
+        },
+        {
+            "category": "Street Light",
+            "email": "lighting.department@example.com"
+        },
+        {
+            "category": "Water Logging",
+            "email": "drainage.department@example.com"
+        },
+        {
+            "category": "Construction Debris",
+            "email": "construction.department@example.com"
+        }
+    ]
+}

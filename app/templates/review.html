@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+
+{% block title %}Review & Confirm - Sahayak{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <h1 class="mb-4 text-center">Step 1: Review & Confirm Details</h1>
+            <p class="lead text-center text-muted mb-5">Please verify the location and issue category before generating the complaint drafts.</p>
+
+            <form id="review-form">
+                <input type="hidden" id="lat" name="lat" value="{{ lat }}">
+                <input type="hidden" id="lon" name="lon" value="{{ lon }}">
+                <input type="hidden" id="severity" name="severity" value="{{ severity }}">
+
+                <div class="card mb-4" id="confirmation-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-map-marked-alt"></i> Routing &amp; Classification</h3>
+                    </div>
+                    <div class="card-body">
+                        <!-- FIX: Replaced static text with a user-configurable dropdown -->
+                        <div class="mb-3">
+                            <label for="authority-select" class="form-label"><strong>Responsible Authority (Editable):</strong></label>
+                            <select class="form-select form-select-lg" id="authority-select" name="authority_city">
+                                {% for city_key, city_data in all_authorities.items() %}
+                                    <option value="{{ city_key }}" {% if city_key == suggested_city %}selected{% endif %}>{{ city_data.name }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="form-text">If the suggested authority is incorrect, please choose the correct one from this list.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="location-name" class="form-label"><strong>Location Address (Editable):</strong></label>
+                            <input type="text" class="form-control" id="location-name" name="location_name" value="{{ display_address }}">
+                        </div>
+                        <div class="mb-3">
+                             <label for="category-select" class="form-label"><strong>Issue Category (Editable):</strong></label>
+                            <select class="form-select form-select-lg" id="category-select" name="category">
+                                {% for cat in categories %}
+                                <option value="{{ cat }}" {% if category == cat %}selected{% endif %}>{{ cat }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div id="draft-error" class="alert alert-warning mt-3 d-none"></div>
+                        <div class="d-grid">
+                            <button type="button" id="generate-drafts-btn" class="btn btn-primary btn-lg">
+                                <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                Confirm &amp; Generate Drafts
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Email Drafts & Submission (Initially Hidden) -->
+                <div class="card d-none" id="drafts-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-envelope-open-text"></i> Step 2: Review &amp; Submit Drafts</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted">The AI has generated the drafts below based on your confirmed details. You can make final edits before submitting.</p>
+                        <div class="mb-3">
+                            <label for="draft-en" class="form-label"><strong>English Draft</strong></label>
+                            <textarea class="form-control" id="draft-en" name="draft_en" rows="8"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="draft-bn" class="form-label"><strong>Bengali Draft</strong></label>
+                            <textarea class="form-control" id="draft-bn" name="draft_bn" rows="8"></textarea>
+                        </div>
+                        <div id="submit-error" class="alert alert-danger d-none"></div>
+                        <div class="d-grid">
+                            <button type="submit" id="submit-btn" class="btn btn-success btn-lg">
+                                <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                Submit Final Report
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('generate-drafts-btn').addEventListener('click', function() {
+    const btn = this;
+    const spinner = btn.querySelector('.spinner-border');
+    const draftError = document.getElementById('draft-error');
+    const draftsCard = document.getElementById('drafts-card');
+
+    btn.disabled = true;
+    spinner.classList.remove('d-none');
+    draftError.classList.add('d-none');
+
+    const data = {
+        category: document.getElementById('category-select').value,
+        severity: document.getElementById('severity').value,
+        lat: document.getElementById('lat').value,
+        lon: document.getElementById('lon').value,
+        location_name: document.getElementById('location-name').value,
+        // Pass the user-confirmed authority to the draft generator
+        authority_name: document.getElementById('authority-select').options[document.getElementById('authority-select').selectedIndex].text
+    };
+
+    fetch("{{ url_for('generate_drafts') }}", {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.error) throw new Error(result.message || 'Failed to generate drafts.');
+        document.getElementById('draft-en').value = result.draft_en;
+        document.getElementById('draft-bn').value = result.draft_bn;
+        draftsCard.classList.remove('d-none');
+        document.getElementById('confirmation-card').classList.add('d-none');
+    })
+    .catch(error => {
+        draftError.textContent = `Error: ${error.message}`;
+        draftError.classList.remove('d-none');
+        btn.disabled = false;
+        spinner.classList.add('d-none');
+    });
+});
+
+document.getElementById('review-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const submitBtn = document.getElementById('submit-btn');
+    const spinner = submitBtn.querySelector('.spinner-border');
+    const submitError = document.getElementById('submit-error');
+
+    submitBtn.disabled = true;
+    spinner.classList.remove('d-none');
+    submitError.classList.add('d-none');
+
+    const data = {
+        lat: document.getElementById('lat').value,
+        lon: document.getElementById('lon').value,
+        category: document.getElementById('category-select').value,
+        location_name: document.getElementById('location-name').value,
+        draft_en: document.getElementById('draft-en').value,
+        // FIX: Send the user's final, confirmed authority choice to the backend
+        authority_city: document.getElementById('authority-select').value
+    };
+
+    fetch("{{ url_for('submit_report') }}", {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.success) {
+            window.location.href = `{{ url_for('submit_success') }}?recipient=${result.recipient}`;
+        } else {
+            throw new Error(result.message || 'Could not submit report.');
+        }
+    })
+    .catch(error => {
+        submitError.textContent = error.message;
+        submitError.classList.remove('d-none');
+        submitBtn.disabled = false;
+        spinner.classList.add('d-none');
+    });
+});
+</script>
+{% endblock %}

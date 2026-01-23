@@ -1,0 +1,13 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex-grow: 1;
+}
+
+[data-bs-theme="dark"] .site-footer {
+    background-color: #343a40 !important;
+}

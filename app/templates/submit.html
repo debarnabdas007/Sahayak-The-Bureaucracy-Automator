@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Report Submitted - Sahayak{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title text-success"><i class="fas fa-check-circle"></i> Report Sent Successfully!</h1>
+                    <p class="lead mt-4">Your civic issue report has been successfully dispatched.</p>
+                    <div class="alert alert-info mt-4">
+                        <strong>Your report was sent to:</strong> {{ recipient }}
+                    </div>
+                    <p class="mt-4">Thank you for being a responsible citizen and using Sahayak to make your community better.</p>
+                    <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg mt-3">File Another Report</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
