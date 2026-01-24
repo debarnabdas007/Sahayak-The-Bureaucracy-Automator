@@ -2,16 +2,15 @@
 
 ## Project Identity
 **Project Name:** Sahayak - The Civic Bureaucracy Automator
-**Developer Role:** Solo Computer Science Undergraduate (GDG Hackathon)
-**Goal:** Build a Flask-based web application that automates the drafting and sending of formal civic complaints to government authorities in West Bengal, India.
+**Developer Role:** Solo CS guy :)
+**Goal:** Building a Flask-based web application that automates the drafting and sending of formal civic complaints to government authorities in West Bengal, India.
 
 ## Core Constraints
-* **Solo Developer:** Code must be modular, simple, and manageable.
-* **Zero Cost:** Must use *only* free tiers (Render.com, Google AI Studio Free, OpenStreetMap). No credit cards.
+* **Zero Cost:** I am using FREE tiers here. (Render.com, Google AI Studio Free, OpenStreetMap).
 * **Tech Stack:**
     * **Backend:** Python (Flask)
     * **Frontend:** HTML/CSS (Bootstrap 5), JavaScript (Leaflet.js)
-    * **AI:** Google Gemini 1.5 Flash (via Google AI Studio API)
+    * **AI:** Google Gemini 2.5 Flash (via Google AI Studio API)
     * **Email:** `smtplib` (Standard Python Library)
     * **PDF:** `fpdf` (For generating formal attachments)
 
@@ -20,7 +19,7 @@
 ## The "Sahayak" Workflow (Professional Grade)
 
 ### Phase 1: The Trust Interface (Input)
-The application acts as a "Bureaucracy Interface." It must support two distinct input modes to ensure data integrity and trust.
+The application acts as a "Bureaucracy Interface." It supports two distinct input modes to ensure data integrity and trust.
 
 1.  **Live Mode (High Trust Path)**
     * **User Action:** Captures a photo directly via the browser (`capture="environment"`).
@@ -31,7 +30,7 @@ The application acts as a "Bureaucracy Interface." It must support two distinct 
     * **Civic Pledge:** User must check a mandatory box: *"I confirm this image is current and represents a genuine civic issue."*
 
 ### Phase 2: AI Analysis & Human-in-the-Loop
-We do not blindly trust the AI. The user validates the AI's analysis before any email is drafted.
+Now We do not blindly trust the AI. The user validates the AI's analysis before any email is drafted.
 
 1.  **AI Analysis (Gemini 1.5 Flash)**
     * **Input:** Image + Location Data.
